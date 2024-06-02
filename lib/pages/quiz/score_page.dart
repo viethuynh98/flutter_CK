@@ -53,6 +53,7 @@ class _ScorePageState extends State<ScorePage> {
             ElevatedButton(
               onPressed: () async {
                 controller.reset();
+                prefs.saveNumOfPlays();
                 Route route = MaterialPageRoute(
                     builder: (context) => HomePage(
                           username: user.username,

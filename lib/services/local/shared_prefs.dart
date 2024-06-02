@@ -7,6 +7,7 @@ class SharedPrefs {
   final String keyUser = 'keyUser';
   final String keyCheckLogin = 'keyCheckLogin';
   final String keyCheckFirstLogin = 'keyCheckFirstLogin';
+  final String keyNumOfPlays = 'keyNumOfPlays';
 
   Future<UserModel?> getUser() async {
     SharedPreferences prefs = await _prefs;
@@ -42,7 +43,7 @@ class SharedPrefs {
     prefs.setBool(keyCheckLogin, false);
   }
 
-    Future<bool?> getKeyCheckFirstLogin() async {
+  Future<bool?> getKeyCheckFirstLogin() async {
     SharedPreferences prefs = await _prefs;
     bool? isFirstLogin = prefs.getBool(keyCheckFirstLogin);
     if (isFirstLogin == null) return false;
@@ -58,5 +59,16 @@ class SharedPrefs {
     SharedPreferences prefs = await _prefs;
     prefs.clear();
   }
-  
+
+  Future<void> saveNumOfPlays() async {
+    SharedPreferences prefs = await _prefs;
+    int currentNumOfPlays = prefs.getInt(keyNumOfPlays) ?? 0;
+    int newNumOfPlays = currentNumOfPlays + 1;
+    prefs.setInt(keyNumOfPlays, newNumOfPlays);
+  }
+
+  Future<int?> getNumOfPlays() async {
+    SharedPreferences prefs = await _prefs;
+    return prefs.getInt(keyNumOfPlays);
+  }
 }
