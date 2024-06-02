@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:shared_prefs_test1/controller/question_controller.dart';
 
@@ -33,6 +34,10 @@ class Option extends StatelessWidget {
             return kGrayColor;
           }
 
+          IconData getTheRightIcon() {
+            return getTheRightColor() == kRedColor ? Icons.close : Icons.done;
+          }
+
           return GestureDetector(
             onTap: onPress,
             child: Container(
@@ -52,9 +57,15 @@ class Option extends StatelessWidget {
                     height: 26.0,
                     width: 26.0,
                     decoration: BoxDecoration(
+                      color: getTheRightColor() == kGrayColor
+                          ? Colors.transparent
+                          : getTheRightColor(),
                       border: Border.all(color: getTheRightColor()),
                       borderRadius: BorderRadius.circular(15.0),
                     ),
+                    child: getTheRightColor() == kGrayColor
+                        ? null
+                        : Icon(getTheRightIcon(), size: 16),
                   )
                 ],
               ),
