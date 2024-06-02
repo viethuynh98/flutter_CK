@@ -60,6 +60,13 @@ class QuestionController extends GetxController
     super.onInit();
   }
 
+  @override
+  void onClose() {
+    super.onClose();
+    _animationController.dispose();
+    _pageController.dispose();
+  }
+
   void checkAns(Question question, int selectedIndex) {
     _isAnswered = true;
     _correctAns = question.answer;
@@ -72,6 +79,32 @@ class QuestionController extends GetxController
       _animationController.stop();
       // rebuild GetBuilder => progressBar
       update();
+
+      // auto go to next page after 3 sec
+      Future.delayed(const Duration(seconds: nextPageDuration), () {
+        nextQuestion();
+      });
     }
+  }
+
+  void nextQuestion() {
+    print(_questionNumber);
+    if (_questionNumber != _questions.length) {
+      _isAnswered = false;
+      _pageController.nextPage(
+          duration: const Duration(microseconds: 250), curve: Curves.ease);
+
+      // reset the counter
+      _animationController.reset();
+
+      // start counter again
+      _animationController.forward().whenComplete(nextQuestion);
+    } else {
+      Get.to(() => ScorePage());
+    }
+  }
+
+  void updateTheQuestionNumber(int index) {
+    _questionNumber.value = index + 1;
   }
 }
