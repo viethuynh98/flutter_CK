@@ -18,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
   bool isLogin = false;
   @override
   void initState() {
-    getValidationData();
+    // getValidationData();
     super.initState();
   }
 

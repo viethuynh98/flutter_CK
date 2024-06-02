@@ -13,3 +13,5 @@ const kPrimaryGradient = LinearGradient(
 const double kDefaultPadding = 20.0;
 
 const int nextPageDuration = 1;
+
+const int progressBarDuration = 10;

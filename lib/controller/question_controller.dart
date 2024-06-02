@@ -62,7 +62,7 @@ class QuestionController extends GetxController
   void onInit() {
     super.onInit();
     _animationController =
-        AnimationController(duration: const Duration(seconds: 60), vsync: this);
+        AnimationController(duration: const Duration(seconds: progressBarDuration), vsync: this);
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController)
       ..addListener(() {
         update();

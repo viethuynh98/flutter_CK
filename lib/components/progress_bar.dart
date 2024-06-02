@@ -28,7 +28,7 @@ class ProgressBar extends StatelessWidget {
                               constraints.maxWidth * controller.animation.value,
                           decoration: BoxDecoration(
                               gradient: kPrimaryGradient,
-                              borderRadius: BorderRadius.circular(50.0)),
+                              borderRadius: BorderRadius.circular(40.0)),
                         )),
                 Positioned.fill(
                     child: Padding(
@@ -37,7 +37,7 @@ class ProgressBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("${(controller.animation.value * 60).round()} sec"),
+                      Text("${(controller.animation.value * progressBarDuration).round()} sec"),
                       const Icon(Icons.lock_clock),
                     ],
                   ),
