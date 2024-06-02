@@ -15,25 +15,17 @@ class SplashPage extends StatefulWidget {
 
 class _SplashPageState extends State<SplashPage> {
   SharedPrefs prefs = SharedPrefs();
-  late bool isLogin;
+  bool isLogin = false;
   @override
   void initState() {
+    getValidationData();
     super.initState();
-    getValidationData().whenComplete(() => _navigateToHome());
   }
 
   Future getValidationData() async {
     await prefs.getKeyCheck().then((value) {
       isLogin = value ?? false;
-      print(isLogin);
       setState(() {});
-    });
-  }
-
-  _navigateToHome() async {
-    await Future.delayed(const Duration(milliseconds: 2000), () {
-      Route route = MaterialPageRoute(builder: (context) => isLogin == false ? const LoginPage() : const HomePage());
-      Navigator.pushReplacement(context, route);
     });
   }
 
@@ -41,9 +33,9 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     return AnimatedSplashScreen(
       splash: Icons.home,
-      nextScreen: const LoginPage(),
+      nextScreen: isLogin == false ? const LoginPage() : const HomePage(),
+      duration: 1500,
       splashTransition: SplashTransition.fadeTransition,
-      pageTransitionType: PageTransitionType.scale,
     );
   }
 }
