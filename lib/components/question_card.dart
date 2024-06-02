@@ -12,6 +12,7 @@ class QuestionCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+        margin: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
         padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding)
             .copyWith(top: 10.0, bottom: 10.0),
         decoration: BoxDecoration(
@@ -31,4 +32,3 @@ class QuestionCard extends StatelessWidget {
         ));
   }
 }
-
