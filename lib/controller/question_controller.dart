@@ -44,7 +44,7 @@ class QuestionController extends GetxController
     // Reset animation
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
 
-    // Reset page controller
+    _pageController.dispose();
     _pageController = PageController();
 
     isAnswered = false;
@@ -52,6 +52,10 @@ class QuestionController extends GetxController
     selectedAns = 0;
     questionNumber.value = 1;
     numOfCorrectAns = 0;
+  }
+
+  void startAnimation() {
+    _animationController.forward().whenComplete(nextQuestion);
   }
 
   // run when initialize instance widget
@@ -63,9 +67,6 @@ class QuestionController extends GetxController
       ..addListener(() {
         update();
       });
-
-    // start animation
-    _animationController.forward().whenComplete(nextQuestion);
 
     _pageController = PageController();
     super.onInit();
@@ -80,7 +81,7 @@ class QuestionController extends GetxController
 
   void checkAns(Question question, int selectedIndex) {
     isAnswered = true;
-    correctAns = question.answer;
+    correctAns = question.answer!;
     selectedAns = selectedIndex;
 
     if (correctAns == selectedAns) {
@@ -110,7 +111,7 @@ class QuestionController extends GetxController
       // start counter again
       _animationController.forward().whenComplete(nextQuestion);
     } else {
-      Get.to(() => ScorePage());
+      Get.to(() => const ScorePage());
     }
   }
 

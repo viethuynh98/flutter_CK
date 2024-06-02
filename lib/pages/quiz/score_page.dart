@@ -34,6 +34,7 @@ class _ScorePageState extends State<ScorePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text('Score'),
       ),
       body: Center(

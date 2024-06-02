@@ -1,13 +1,31 @@
 class Question {
-  final int id, answer;
-  final String question;
-  final List<String> options;
+  int? id, answer;
+  String? question;
+  List<String>? options;
 
   Question(
       {required this.id,
       required this.question,
       required this.answer,
       required this.options});
+
+  Map<String, dynamic> toJson() {
+    return {
+      'id': id,
+      'question': question,
+      'options': options,
+      'answer': answer,
+    };
+  }
+
+  Question.fromJson(Map<String, dynamic> json) {
+    Question(
+      id: json['id'],
+      question: json['question'],
+      options: List<String>.from(json['options']),
+      answer: json['answer'],
+    );
+  }
 }
 
 const List sample_data = [

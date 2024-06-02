@@ -27,13 +27,13 @@ class QuestionCard extends StatelessWidget {
         child: Column(
           children: [
             const SizedBox(height: 10.0),
-            Text(question.question,
+            Text(question.question!,
                 style: const TextStyle(color: Colors.black)),
             const SizedBox(height: kDefaultFontSize),
             ...List.generate(
-                question.options.length,
+                question.options!.length,
                 (index) => Option(
-                    text: question.options[index],
+                    text: question.options![index],
                     index: index,
                     onPress: () {
                       if (!controller.isAnswered) {

@@ -8,13 +8,14 @@ class QuizPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
+    QuestionController controller = Get.put(QuestionController());
+    controller.startAnimation();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         actions: [
           IconButton(
-              onPressed: _controller.nextQuestion,
+              onPressed: controller.nextQuestion,
               icon: const Icon(Icons.arrow_circle_right_outlined,
                   color: Colors.grey))
         ],
