@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:shared_prefs_test1/pages/quiz/quiz_page.dart';
 import '../components/app_elevated_button.dart';
 import '../components/app_text_field.dart';
 import '../constants.dart';
@@ -32,7 +33,7 @@ class _WelcomePageState extends State<WelcomePage> {
                 ),
                 Text(
                   title,
-                  style: TextStyle(color: Colors.orange, fontSize: 25.0),
+                  style: const TextStyle(color: Colors.orange, fontSize: 25.0),
                 ),
                 AppTextField(
                   controller: nameController,
@@ -45,7 +46,7 @@ class _WelcomePageState extends State<WelcomePage> {
                   widthFactor: 0.4,
                   child: AppElevatedButton(
                     text: "Let's start a quiz",
-                    onPressed: () {},
+                    onPressed: () => Get.to(const QuizPage()),
                   ),
                 )
               ],

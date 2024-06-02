@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'pages/Welcome_page.dart';
+import 'package:get/get.dart';
+import 'pages/welcome_page.dart';
 import 'pages/change_password_page.dart';
 import 'pages/login_page.dart';
 import 'pages/quiz/quiz_page.dart';
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(useMaterial3: true),
