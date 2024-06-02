@@ -21,7 +21,14 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
-      theme: ThemeData(useMaterial3: true),
+      theme: ThemeData(
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.blue,
+          titleTextStyle: TextStyle(color: Colors.yellow, fontSize: 20.0),
+          centerTitle: true,
+        ),
+        useMaterial3: true,
+      ),
       home: const HomePage(),
     );
   }

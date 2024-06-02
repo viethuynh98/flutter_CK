@@ -2,8 +2,8 @@ import 'dart:async';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:page_transition/page_transition.dart';
-import 'package:shared_prefs_test1/pages/home_page.dart';
 import '../services/local/shared_prefs.dart';
+import 'home_page.dart';
 import 'login_page.dart';
 
 class SplashPage extends StatefulWidget {

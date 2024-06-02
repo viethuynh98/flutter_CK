@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:shared_prefs_test1/controller/question_controller.dart';
-
 import '../constants.dart';
+import '../controller/question_controller.dart';
 
 class Option extends StatelessWidget {
   const Option({
