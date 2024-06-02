@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import '../constants.dart';
 import '../models/questions.dart';
 import '../pages/quiz/score_page.dart';
+import '../services/local/shared_prefs.dart';
 
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -11,23 +12,14 @@ class QuestionController extends GetxController
   late AnimationController _animationController;
   late Animation _animation;
 
+  SharedPrefs prefs = SharedPrefs();
+
   Animation get animation => _animation;
 
   late PageController _pageController;
   PageController get pageController => _pageController;
 
-  final List<Question> _questions = sample_data
-      .map(
-        (question) => Question(
-          id: question['id'],
-          question: question['question'],
-          options: List<String>.from(question['options']),
-          answer: question['answer_index'],
-        ),
-      )
-      .toList();
-
-  List<Question> get questions => _questions;
+  List<Question> questions = sample_data;
 
   bool isAnswered = false;
 
@@ -37,6 +29,12 @@ class QuestionController extends GetxController
   final RxInt questionNumber = 1.obs;
 
   int numOfCorrectAns = 0;
+
+  void getQuestions() {
+    prefs.getQuestions().then((value) {
+      questions = value ?? [...sample_data];
+    });
+  }
 
   void reset() {
     // Reset animation controller
@@ -62,6 +60,7 @@ class QuestionController extends GetxController
   // run when initialize instance widget
   @override
   void onInit() {
+    super.onInit();
     _animationController =
         AnimationController(duration: const Duration(seconds: 60), vsync: this);
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController)
@@ -70,7 +69,7 @@ class QuestionController extends GetxController
       });
 
     _pageController = PageController();
-    super.onInit();
+    getQuestions();
   }
 
   @override
@@ -101,7 +100,7 @@ class QuestionController extends GetxController
 
   void nextQuestion() {
     print(questionNumber);
-    if (questionNumber.value != _questions.length) {
+    if (questionNumber.value != questions.length) {
       isAnswered = false;
       _pageController.nextPage(
           duration: const Duration(milliseconds: 250), curve: Curves.ease);

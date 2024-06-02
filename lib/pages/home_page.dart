@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.greenAccent,
+      // backgroundColor: Colors.greenAccent,
       drawer: Drawer(
           child: ListView(
         children: [
@@ -41,15 +41,15 @@ class _HomePageState extends State<HomePage> {
             decoration: BoxDecoration(color: Colors.orange),
             child: Text("Menu"),
           ),
-          ListTile(
-            leading: const Icon(Icons.password),
-            title: const Text("Add Question"),
-            onTap: () {
-              Route route = MaterialPageRoute(
-                  builder: (context) => const AddQuestionPage());
-              Navigator.push(context, route);
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.password),
+          //   title: const Text("Add Question"),
+          //   onTap: () {
+          //     Route route = MaterialPageRoute(
+          //         builder: (context) => const AddQuestionPage());
+          //     Navigator.push(context, route);
+          //   },
+          // ),
           ListTile(
             leading: const Icon(Icons.password),
             title: const Text("Change Password"),
@@ -88,6 +88,7 @@ class _HomePageState extends State<HomePage> {
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
               child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     title,

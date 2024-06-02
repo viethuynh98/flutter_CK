@@ -1,125 +1,108 @@
-import 'package:flutter/material.dart';
+// import 'package:flutter/material.dart';
+// import '../../models/questions.dart';
+// import '../../services/local/shared_prefs.dart';
 
-import '../../models/questions.dart';
-import '../../services/local/shared_prefs.dart';
-import '../home_page.dart';
+// class AddQuestionPage extends StatefulWidget {
+//   const AddQuestionPage({super.key});
 
-class AddQuestionPage extends StatefulWidget {
-  const AddQuestionPage({super.key});
+//   @override
+//   State<AddQuestionPage> createState() => _AddQuestionPageState();
+// }
 
-  @override
-  State<AddQuestionPage> createState() => _AddQuestionPageState();
-}
+// class _AddQuestionPageState extends State<AddQuestionPage> {
+//   TextEditingController questionController = TextEditingController();
+//   TextEditingController option1Controller = TextEditingController();
+//   TextEditingController option2Controller = TextEditingController();
+//   TextEditingController option3Controller = TextEditingController();
+//   TextEditingController option4Controller = TextEditingController();
+//   TextEditingController answerController = TextEditingController();
+//   SharedPrefs prefs = SharedPrefs();
 
-class _AddQuestionPageState extends State<AddQuestionPage> {
-  late TextEditingController questionController;
-  late TextEditingController option1Controller;
-  late TextEditingController option2Controller;
-  late TextEditingController option3Controller;
-  late TextEditingController option4Controller;
-  late TextEditingController answerController;
+//   void _addQuestion() async {
+//     String text = questionController.text.trim();
+//     String option1 = option1Controller.text.trim();
+//     String option2 = option2Controller.text.trim();
+//     String option3 = option3Controller.text.trim();
+//     String option4 = option4Controller.text.trim();
+//     int answer = int.parse(answerController.text.trim());
 
-  SharedPrefs prefs = SharedPrefs();
+//     if (text.isEmpty ||
+//         option1.isEmpty ||
+//         option2.isEmpty ||
+//         option3.isEmpty ||
+//         option4.isEmpty ||
+//         answer < 1 ||
+//         answer > 4) {
+//       return;
+//     }
 
-  @override
-  void initState() {
-    super.initState();
-    questionController = TextEditingController();
-    option1Controller = TextEditingController();
-    option2Controller = TextEditingController();
-    option3Controller = TextEditingController();
-    option4Controller = TextEditingController();
-    answerController = TextEditingController();
-  }
+//     final question = Question(
+//       id: DateTime.now().millisecondsSinceEpoch,
+//       question: text,
+//       options: [option1, option2, option3, option4],
+//       answer: answer,
+//     );
 
-  @override
-  void dispose() {
-    questionController.dispose();
-    option1Controller.dispose();
-    option2Controller.dispose();
-    option3Controller.dispose();
-    option4Controller.dispose();
-    answerController.dispose();
-    super.dispose();
-  }
+//     List<Question> currentQuestions = await prefs.getQuestions();
+//     currentQuestions.add(question);
+//     await prefs.saveQuestions(currentQuestions);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add New Question'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              TextField(
-                controller: questionController,
-                decoration: const InputDecoration(labelText: 'Question'),
-              ),
-              TextField(
-                controller: option1Controller,
-                decoration: const InputDecoration(labelText: 'Option 1'),
-              ),
-              TextField(
-                controller: option2Controller,
-                decoration: const InputDecoration(labelText: 'Option 2'),
-              ),
-              TextField(
-                controller: option3Controller,
-                decoration: const InputDecoration(labelText: 'Option 3'),
-              ),
-              TextField(
-                controller: option4Controller,
-                decoration: const InputDecoration(labelText: 'Option 4'),
-              ),
-              TextField(
-                controller: answerController,
-                decoration: const InputDecoration(labelText: 'Answer Index'),
-                keyboardType: TextInputType.number,
-              ),
-              ElevatedButton(
-                onPressed: () async {
-                  Question newQuestion = Question(
-                    id: sample_data.length + 1,
-                    question: questionController.text,
-                    options: [
-                      option1Controller.text,
-                      option2Controller.text,
-                      option3Controller.text,
-                      option4Controller.text,
-                    ],
-                    answer: int.parse(answerController.text),
-                  );
+//     // Clear fields and show a confirmation
+//     _clearFields();
+//     ScaffoldMessenger.of(context)
+//         .showSnackBar(SnackBar(content: Text('Question added!')));
+//   }
 
-                  List<Question> newQuestions = [newQuestion];
+//   void _clearFields() {
+//     questionController.clear();
+//     option1Controller.clear();
+//     option2Controller.clear();
+//     option3Controller.clear();
+//     option4Controller.clear();
+//     answerController.clear();
+//   }
 
-                  await prefs.saveNewQuestions(newQuestions);
-
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                        content: Text('Question added successfully!')),
-                  );
-
-                  questionController.clear();
-                  option1Controller.clear();
-                  option2Controller.clear();
-                  option3Controller.clear();
-                  option4Controller.clear();
-                  answerController.clear();
-
-                  Route route =
-                      MaterialPageRoute(builder: (context) => const HomePage());
-                  Navigator.pushReplacement(context, route);
-                },
-                child: const Text('Add Question'),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(title: const Text('Add Question')),
+//       body: Padding(
+//         padding: const EdgeInsets.all(16.0),
+//         child: Column(
+//           children: [
+//             TextField(
+//               controller: questionController,
+//               decoration: InputDecoration(labelText: 'Question'),
+//             ),
+//             TextField(
+//               controller: option1Controller,
+//               decoration: InputDecoration(labelText: 'Option 1'),
+//             ),
+//             TextField(
+//               controller: option2Controller,
+//               decoration: InputDecoration(labelText: 'Option 2'),
+//             ),
+//             TextField(
+//               controller: option3Controller,
+//               decoration: InputDecoration(labelText: 'Option 3'),
+//             ),
+//             TextField(
+//               controller: option4Controller,
+//               decoration: InputDecoration(labelText: 'Option 4'),
+//             ),
+//             TextField(
+//               controller: answerController,
+//               decoration: InputDecoration(labelText: 'Answer (1-4)'),
+//               keyboardType: TextInputType.number,
+//             ),
+//             SizedBox(height: 20),
+//             ElevatedButton(
+//               onPressed: _addQuestion,
+//               child: const Text('Add Question'),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }

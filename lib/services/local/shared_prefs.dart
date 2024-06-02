@@ -13,12 +13,12 @@ class SharedPrefs {
 
   Future<UserModel?> getUser() async {
     SharedPreferences prefs = await _prefs;
-    String? data = prefs.getString(keyUser); // lấy dữ liệu ra thông qua key
+    String? data = prefs.getString(keyUser); 
     if (data == null) return null;
 
     print('object $data');
 
-    Map<String, dynamic> map = jsonDecode(data); // biến string thành Map
+    Map<String, dynamic> map = jsonDecode(data);
 
     print('object $map');
 
@@ -30,7 +30,7 @@ class SharedPrefs {
     SharedPreferences prefs = await _prefs;
     Map<String, dynamic> map = user.toJson();
     // NOTE
-    prefs.setString(keyUser, jsonEncode(map)); // biến Map thành string
+    prefs.setString(keyUser, jsonEncode(map)); 
   }
 
   Future<bool?> getKeyCheck() async {
@@ -74,23 +74,22 @@ class SharedPrefs {
     return prefs.getInt(keyNumOfPlays);
   }
 
-  Future<void> saveNewQuestions(List<Question> newQuestions) async {
+    Future<List<Question>?> getQuestions() async {
     SharedPreferences prefs = await _prefs;
-    List<String> questionStrings =
-        newQuestions.map((question) => jsonEncode(question.toJson())).toList();
-    prefs.setStringList(keyNewQuestions, questionStrings);
+    String? data = prefs.getString(keyNewQuestions);
+    if (data == null) return null;
+
+    print('object $data');
+
+    List<Map<String, dynamic>> maps = jsonDecode(data)
+        .cast<Map<String, dynamic>>() as List<Map<String, dynamic>>;
+
+    return maps.map((e) => Question.fromJson(e)).toList();
   }
 
-  Future<List<Question>> loadNewQuestions() async {
+  Future<void> saveQuestions(List<Question> questions) async {
     SharedPreferences prefs = await _prefs;
-    List<String>? questionStrings = prefs.getStringList(keyNewQuestions);
-    if (questionStrings == null) {
-      return [];
-    }
-
-    return questionStrings.map((jsonString) {
-      Map<String, dynamic> json = jsonDecode(jsonString);
-      return Question.fromJson(json);
-    }).toList();
+    List<Map<String, dynamic>> maps = questions.map((e) => e.toJson()).toList();
+    prefs.setString(keyNewQuestions, jsonEncode(maps));
   }
 }
