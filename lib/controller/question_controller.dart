@@ -23,7 +23,8 @@ class QuestionController extends GetxController
 
   List<Question> get questions => _questions;
 
-  late bool _isAnswered = false;
+  bool _isAnswered = false;
+  bool get isAnswered => _isAnswered;
 
   late int _correctAns;
   int get correctAns => _correctAns;
@@ -34,7 +35,7 @@ class QuestionController extends GetxController
   final RxInt _questionNumber = 1.obs;
   RxInt get questionNumber => _questionNumber;
 
-  late int _numOfCorrectAns;
+  int _numOfCorrectAns = 0;
   int get numOfCorrectAns => _numOfCorrectAns;
 
   @override
