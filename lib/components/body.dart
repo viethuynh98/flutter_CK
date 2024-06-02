@@ -13,7 +13,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // access controller
-    QuestionController _questionController = Get.put(QuestionController());
+    QuestionController questionController = Get.put(QuestionController());
     return Stack(
       children: [
         Column(
@@ -24,28 +24,33 @@ class Body extends StatelessWidget {
               child: ProgressBar(),
             ),
             const SizedBox(height: kDefaultPadding),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
-              child: Text.rich(TextSpan(
-                text: "Question 1",
-                style: TextStyle(
-                    color: kSecondaryColor, fontWeight: FontWeight.w500),
-                children: [
-                  TextSpan(
-                    text: "/10",
-                    style: TextStyle(
-                        color: kSecondaryColor, fontWeight: FontWeight.bold),
-                  )
-                ],
-              )),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: Obx(() => Text.rich(TextSpan(
+                    text: "Question ${questionController.questionNumber}",
+                    style: const TextStyle(
+                        color: kSecondaryColor, fontWeight: FontWeight.w500),
+                    children: [
+                      TextSpan(
+                        text: " / ${questionController.questions.length}",
+                        style: const TextStyle(
+                            color: kSecondaryColor,
+                            fontWeight: FontWeight.bold),
+                      )
+                    ],
+                  ))),
             ),
             const Divider(thickness: 1.5),
             const SizedBox(height: kDefaultPadding),
             Expanded(
                 child: PageView.builder(
-                    itemCount: _questionController.questions.length,
+                    // block swipe to the next question
+                    physics: const NeverScrollableScrollPhysics(),
+                    controller: questionController.pageController,
+                    onPageChanged: questionController.updateTheQuestionNumber,
+                    itemCount: questionController.questions.length,
                     itemBuilder: (context, index) => QuestionCard(
-                          question: _questionController.questions[index],
+                          question: questionController.questions[index],
                         ))),
             const SizedBox(height: 20.0),
           ],
