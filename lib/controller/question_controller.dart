@@ -31,7 +31,7 @@ class QuestionController extends GetxController
   bool _isAnswered = false;
   bool get isAnswered => _isAnswered;
 
-  late int _correctAns;
+  int _correctAns = 0;
   int get correctAns => _correctAns;
 
   late int _selectedAns;

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'pages/welcome_page.dart';
+import 'package:shared_prefs_test1/pages/home_page.dart';
 import 'pages/change_password_page.dart';
 import 'pages/login_page.dart';
 import 'pages/quiz/quiz_page.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(useMaterial3: true),
-      home: const QuizPage(),
+      home: const HomePage(),
     );
   }
 }

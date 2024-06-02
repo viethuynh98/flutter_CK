@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:shared_prefs_test1/constants.dart';
-
 import '../../controller/question_controller.dart';
+import 'package:get/get.dart';
 
 class ScorePage extends StatelessWidget {
   const ScorePage({super.key});
@@ -11,21 +9,31 @@ class ScorePage extends StatelessWidget {
   Widget build(BuildContext context) {
     QuestionController _controller = Get.put(QuestionController());
     return Scaffold(
-      body: Stack(
-        fit: StackFit.expand, // size non positioned children
-        children: [
-          Spacer(),
-          const Text(
-            "Score",
-            style: TextStyle(color: kGrayColor, fontSize: 25.5),
-          ),
-          Spacer(),
-          Text(
-            "${_controller.correctAns * 10}/ ${_controller.questions.length * 10}",
-            style: const TextStyle(color: kGrayColor, fontSize: 25.5),
-          ),
-          Spacer(),
-        ],
+      appBar: AppBar(
+        title: const Text('Score'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Text(
+              'Your Score',
+              style: TextStyle(fontSize: 24),
+            ),
+            const SizedBox(height: 20),
+            Text(
+              "${_controller.correctAns * 10}/ ${_controller.questions.length * 10}",
+              style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 40),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text('Back to Quiz'),
+            ),
+          ],
+        ),
       ),
     );
   }

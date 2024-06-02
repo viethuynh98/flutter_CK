@@ -101,7 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                               result = 'Login success!';
                               Route route = MaterialPageRoute(
                                   builder: (context) => HomePage(
-                                        title: 'HomePage',
+                                        // title: 'HomePage',
                                         username:
                                             usernameController.text.trim(),
                                       ));

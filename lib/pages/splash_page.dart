@@ -32,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
 
   _navigateToHome() async {
     await Future.delayed(const Duration(milliseconds: 2000), () {
-      Route route = MaterialPageRoute(builder: (context) => isLogin == false ? const LoginPage() : const HomePage(title: 'test'));
+      Route route = MaterialPageRoute(builder: (context) => isLogin == false ? const LoginPage() : const HomePage());
       Navigator.pushReplacement(context, route);
     });
   }
