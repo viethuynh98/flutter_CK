@@ -23,6 +23,20 @@ class QuestionController extends GetxController
 
   List<Question> get questions => _questions;
 
+  late bool _isAnswered = false;
+
+  late int _correctAns;
+  int get correctAns => _correctAns;
+
+  late int _selectedAns;
+  int get selectedAns => _selectedAns;
+
+  final RxInt _questionNumber = 1.obs;
+  RxInt get questionNumber => _questionNumber;
+
+  late int _numOfCorrectAns;
+  int get numOfCorrectAns => _numOfCorrectAns;
+
   @override
   void onInit() {
     _animationController =
@@ -36,5 +50,20 @@ class QuestionController extends GetxController
     _animationController.forward();
 
     super.onInit();
+  }
+
+  void checkAns(Question question, int selectedIndex) {
+    _isAnswered = true;
+    _correctAns = question.answer;
+    _selectedAns = selectedIndex;
+
+    if (_correctAns == _selectedAns) {
+      _numOfCorrectAns++;
+
+      // stop the counter when give the answer
+      _animationController.stop();
+      // rebuild GetBuilder => progressBar
+      update();
+    }
   }
 }
