@@ -31,6 +31,7 @@ class _SplashPageState extends State<SplashPage> {
 
   @override
   Widget build(BuildContext context) {
+    getValidationData();
     return AnimatedSplashScreen(
       splash: Icons.home,
       nextScreen: isLogin == false ? const LoginPage() : const HomePage(),
