@@ -1,13 +1,37 @@
 import 'package:flutter/material.dart';
-import '../../controller/question_controller.dart';
 import 'package:get/get.dart';
+import '../../controller/question_controller.dart';
+import '../../models/user_model.dart';
+import '../../services/local/shared_prefs.dart';
+import '../home_page.dart';
 
-class ScorePage extends StatelessWidget {
+class ScorePage extends StatefulWidget {
   const ScorePage({super.key});
 
   @override
+  State<ScorePage> createState() => _ScorePageState();
+}
+
+class _ScorePageState extends State<ScorePage> {
+  QuestionController controller = Get.put(QuestionController());
+  SharedPrefs prefs = SharedPrefs();
+  late UserModel user;
+
+  @override
+  void initState() {
+    super.initState();
+    getUser();
+  }
+
+  void getUser() {
+    prefs.getUser().then((value) {
+      user = value ?? UserModel();
+      setState(() {});
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    QuestionController _controller = Get.put(QuestionController());
     return Scaffold(
       appBar: AppBar(
         title: const Text('Score'),
@@ -22,13 +46,17 @@ class ScorePage extends StatelessWidget {
             ),
             const SizedBox(height: 20),
             Text(
-              "${_controller.correctAns * 10}/ ${_controller.questions.length * 10}",
+              "${controller.numOfCorrectAns * 10}/ ${controller.questions.length * 10}",
               style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 40),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
+              onPressed: () async {
+                Route route = MaterialPageRoute(
+                    builder: (context) => HomePage(
+                          username: user.username,
+                        ));
+                Navigator.pushReplacement(context, route);
               },
               child: const Text('Back to Quiz'),
             ),
