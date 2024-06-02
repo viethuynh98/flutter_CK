@@ -3,11 +3,7 @@ class Question {
   String? question;
   List<String>? options;
 
-  Question(
-      {required this.id,
-      required this.question,
-      required this.answer,
-      required this.options});
+  Question({this.id, this.question, this.options, this.answer});
 
   Map<String, dynamic> toJson() {
     return {
@@ -18,8 +14,8 @@ class Question {
     };
   }
 
-  Question.fromJson(Map<String, dynamic> json) {
-    Question(
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
       id: json['id'],
       question: json['question'],
       options: List<String>.from(json['options']),

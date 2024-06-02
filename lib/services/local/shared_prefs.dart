@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
+import '../../models/questions.dart';
 import '../../models/user_model.dart';
 
 class SharedPrefs {
@@ -8,6 +9,7 @@ class SharedPrefs {
   final String keyCheckLogin = 'keyCheckLogin';
   final String keyCheckFirstLogin = 'keyCheckFirstLogin';
   final String keyNumOfPlays = 'keyNumOfPlays';
+  final String keyNewQuestions = 'keyNewQuestions';
 
   Future<UserModel?> getUser() async {
     SharedPreferences prefs = await _prefs;
@@ -70,5 +72,25 @@ class SharedPrefs {
   Future<int?> getNumOfPlays() async {
     SharedPreferences prefs = await _prefs;
     return prefs.getInt(keyNumOfPlays);
+  }
+
+  Future<void> saveNewQuestions(List<Question> newQuestions) async {
+    SharedPreferences prefs = await _prefs;
+    List<String> questionStrings =
+        newQuestions.map((question) => jsonEncode(question.toJson())).toList();
+    prefs.setStringList(keyNewQuestions, questionStrings);
+  }
+
+  Future<List<Question>> loadNewQuestions() async {
+    SharedPreferences prefs = await _prefs;
+    List<String>? questionStrings = prefs.getStringList(keyNewQuestions);
+    if (questionStrings == null) {
+      return [];
+    }
+
+    return questionStrings.map((jsonString) {
+      Map<String, dynamic> json = jsonDecode(jsonString);
+      return Question.fromJson(json);
+    }).toList();
   }
 }

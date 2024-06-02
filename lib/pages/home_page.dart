@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_prefs_test1/pages/quiz/add_question.dart';
 import '../components/app_elevated_button.dart';
 import '../constants.dart';
 import '../services/local/shared_prefs.dart';
@@ -39,6 +40,15 @@ class _HomePageState extends State<HomePage> {
           const DrawerHeader(
             decoration: BoxDecoration(color: Colors.orange),
             child: Text("Menu"),
+          ),
+          ListTile(
+            leading: const Icon(Icons.password),
+            title: const Text("Add Question"),
+            onTap: () {
+              Route route = MaterialPageRoute(
+                  builder: (context) => const AddQuestionPage());
+              Navigator.push(context, route);
+            },
           ),
           ListTile(
             leading: const Icon(Icons.password),

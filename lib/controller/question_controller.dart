@@ -19,10 +19,11 @@ class QuestionController extends GetxController
   final List<Question> _questions = sample_data
       .map(
         (question) => Question(
-            id: question['id'],
-            question: question['question'],
-            options: question['options'],
-            answer: question['answer_index']),
+          id: question['id'],
+          question: question['question'],
+          options: List<String>.from(question['options']),
+          answer: question['answer_index'],
+        ),
       )
       .toList();
 
@@ -100,10 +101,10 @@ class QuestionController extends GetxController
 
   void nextQuestion() {
     print(questionNumber);
-    if (questionNumber != _questions.length) {
+    if (questionNumber.value != _questions.length) {
       isAnswered = false;
       _pageController.nextPage(
-          duration: const Duration(microseconds: 250), curve: Curves.ease);
+          duration: const Duration(milliseconds: 250), curve: Curves.ease);
 
       // reset the counter
       _animationController.reset();
