@@ -27,10 +27,12 @@ class QuestionCard extends StatelessWidget {
             Text(question.question,
                 style: const TextStyle(color: Colors.black)),
             const SizedBox(height: kDefaultFontSize),
-            Option(),
-            Option(),
-            Option(),
-            Option(),
+            ...List.generate(
+                question.options.length,
+                (index) => Option(
+                    text: question.options[index],
+                    index: index,
+                    onPress: () {}))
           ],
         ));
   }
