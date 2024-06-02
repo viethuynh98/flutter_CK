@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import '../constants.dart';
+import '../controller/question_controller.dart';
 import 'progress_bar.dart';
 import 'question_card.dart';
 
@@ -10,6 +12,8 @@ class Body extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // access controller
+    QuestionController _questionController = Get.put(QuestionController());
     return Stack(
       children: [
         Column(
@@ -20,9 +24,9 @@ class Body extends StatelessWidget {
               child: ProgressBar(),
             ),
             const SizedBox(height: kDefaultPadding),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: kDefaultPadding),
-              child: const Text.rich(TextSpan(
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: kDefaultPadding),
+              child: Text.rich(TextSpan(
                 text: "Question 1",
                 style: TextStyle(
                     color: kSecondaryColor, fontWeight: FontWeight.w500),
@@ -39,7 +43,10 @@ class Body extends StatelessWidget {
             const SizedBox(height: kDefaultPadding),
             Expanded(
                 child: PageView.builder(
-                    itemBuilder: (context, index) => QuestionCard())),
+                    itemCount: _questionController.questions.length,
+                    itemBuilder: (context, index) => QuestionCard(
+                          question: _questionController.questions[index],
+                        ))),
             const SizedBox(height: 20.0),
           ],
         )
