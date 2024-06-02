@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 import '../constants.dart';
 import 'progress_bar.dart';
+import 'question_card.dart';
 
 class Body extends StatelessWidget {
   const Body({
@@ -19,19 +19,23 @@ class Body extends StatelessWidget {
             children: [
               ProgressBar(),
               const SizedBox(height: kDefaultPadding),
-              Text.rich(TextSpan(
+              const Text.rich(TextSpan(
                 text: "Question 1",
-                style: const TextStyle(
+                style: TextStyle(
                     color: kSecondaryColor, fontWeight: FontWeight.w500),
                 children: [
                   TextSpan(
                     text: "/10",
-                    style: const TextStyle(
+                    style: TextStyle(
                         color: kSecondaryColor, fontWeight: FontWeight.bold),
                   )
                 ],
               )),
+              const Divider(thickness: 1.5),
               const SizedBox(height: kDefaultPadding),
+              Expanded(
+                  child: PageView.builder(
+                      itemBuilder: (context, index) => QuestionCard())),
             ],
           ),
         )
