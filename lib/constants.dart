@@ -11,3 +11,5 @@ const kPrimaryGradient = LinearGradient(
     end: Alignment.bottomRight);
 
 const double kDefaultPadding = 20.0;
+
+const int nextPageDuration = 1;
