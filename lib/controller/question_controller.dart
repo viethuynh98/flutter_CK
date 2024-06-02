@@ -28,20 +28,31 @@ class QuestionController extends GetxController
 
   List<Question> get questions => _questions;
 
-  bool _isAnswered = false;
-  bool get isAnswered => _isAnswered;
+  bool isAnswered = false;
 
-  late int _correctAns;
-  int get correctAns => _correctAns;
+  late int correctAns;
+  late int selectedAns;
 
-  late int _selectedAns;
-  int get selectedAns => _selectedAns;
+  final RxInt questionNumber = 1.obs;
 
-  final RxInt _questionNumber = 1.obs;
-  RxInt get questionNumber => _questionNumber;
+  int numOfCorrectAns = 0;
 
-  int _numOfCorrectAns = 0;
-  int get numOfCorrectAns => _numOfCorrectAns;
+  void reset() {
+    // Reset animation controller
+    _animationController.reset();
+
+    // Reset animation
+    _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
+
+    // Reset page controller
+    _pageController = PageController();
+
+    isAnswered = false;
+    correctAns = 0;
+    selectedAns = 0;
+    questionNumber.value = 1;
+    numOfCorrectAns = 0;
+  }
 
   // run when initialize instance widget
   @override
@@ -68,29 +79,28 @@ class QuestionController extends GetxController
   }
 
   void checkAns(Question question, int selectedIndex) {
-    _isAnswered = true;
-    _correctAns = question.answer;
-    _selectedAns = selectedIndex;
+    isAnswered = true;
+    correctAns = question.answer;
+    selectedAns = selectedIndex;
 
-    if (_correctAns == _selectedAns) {
-      _numOfCorrectAns++;
-
-      // stop the counter when give the answer
-      _animationController.stop();
-      // rebuild GetBuilder => progressBar
-      update();
-
-      // auto go to next page after 3 sec
-      Future.delayed(const Duration(seconds: nextPageDuration), () {
-        nextQuestion();
-      });
+    if (correctAns == selectedAns) {
+      numOfCorrectAns++;
     }
+    // stop the counter when give the answer
+    _animationController.stop();
+    // rebuild GetBuilder => progressBar
+    update();
+
+    // auto go to next page after 3 sec
+    Future.delayed(const Duration(seconds: nextPageDuration), () {
+      nextQuestion();
+    });
   }
 
   void nextQuestion() {
-    print(_questionNumber);
-    if (_questionNumber != _questions.length) {
-      _isAnswered = false;
+    print(questionNumber);
+    if (questionNumber != _questions.length) {
+      isAnswered = false;
       _pageController.nextPage(
           duration: const Duration(microseconds: 250), curve: Curves.ease);
 
@@ -105,6 +115,6 @@ class QuestionController extends GetxController
   }
 
   void updateTheQuestionNumber(int index) {
-    _questionNumber.value = index + 1;
+    questionNumber.value = index + 1;
   }
 }

@@ -35,7 +35,11 @@ class QuestionCard extends StatelessWidget {
                 (index) => Option(
                     text: question.options[index],
                     index: index,
-                    onPress: () => controller.checkAns(question, index)))
+                    onPress: () {
+                      if (!controller.isAnswered) {
+                        controller.checkAns(question, index);
+                      }
+                    }))
           ],
         ));
   }

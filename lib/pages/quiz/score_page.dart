@@ -52,6 +52,7 @@ class _ScorePageState extends State<ScorePage> {
             const SizedBox(height: 40),
             ElevatedButton(
               onPressed: () async {
+                controller.reset();
                 Route route = MaterialPageRoute(
                     builder: (context) => HomePage(
                           username: user.username,

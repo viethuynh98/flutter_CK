@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
                     widthFactor: 0.6,
                     child: AppElevatedButton(
                       text: "Let's start a quiz",
-                      onPressed: () => Get.to(const QuizPage()),
+                      onPressed: () => Get.to(() => const QuizPage()),
                     ),
                   )
                 ],
