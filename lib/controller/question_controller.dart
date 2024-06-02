@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../constants.dart';
 import '../models/questions.dart';
+import '../pages/quiz/score_page.dart';
 
 class QuestionController extends GetxController
     with GetSingleTickerProviderStateMixin {
@@ -10,6 +12,9 @@ class QuestionController extends GetxController
   late Animation _animation;
 
   Animation get animation => _animation;
+
+  late PageController _pageController;
+  PageController get pageController => _pageController;
 
   final List<Question> _questions = sample_data
       .map(
@@ -38,6 +43,7 @@ class QuestionController extends GetxController
   int _numOfCorrectAns = 0;
   int get numOfCorrectAns => _numOfCorrectAns;
 
+  // run when initialize instance widget
   @override
   void onInit() {
     _animationController =
@@ -50,6 +56,7 @@ class QuestionController extends GetxController
     // start animation
     _animationController.forward();
 
+    _pageController = PageController();
     super.onInit();
   }
 
