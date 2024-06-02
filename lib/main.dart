@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shared_prefs_test1/pages/change_password_page.dart';
-import 'package:shared_prefs_test1/pages/login_page.dart';
-import 'package:shared_prefs_test1/pages/register_page.dart';
+import 'pages/Welcome_page.dart';
+import 'pages/change_password_page.dart';
+import 'pages/login_page.dart';
+import 'pages/quiz/quiz_page.dart';
+import 'pages/register_page.dart';
 import 'pages/onboarding_page.dart';
 import 'pages/splash_page.dart';
 
@@ -19,7 +21,7 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(useMaterial3: true),
-      home: const SplashPage(),
+      home: const QuizPage(),
     );
   }
 }
