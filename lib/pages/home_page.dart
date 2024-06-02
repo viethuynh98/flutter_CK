@@ -33,7 +33,41 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.greenAccent,
+      drawer: Drawer(
+          child: ListView(
+        children: [
+          const DrawerHeader(
+            decoration: BoxDecoration(color: Colors.orange),
+            child: Text("Menu"),
+          ),
+          ListTile(
+            leading: const Icon(Icons.password),
+            title: const Text("Change Password"),
+            onTap: () {
+              Route route = MaterialPageRoute(
+                  builder: (context) => ChangePasswordPage(
+                        username: widget.username,
+                      ));
+              Navigator.push(context, route);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text("Log out"),
+            onTap: () {
+              prefs.saveKeyCheck();
+              Route route =
+                  MaterialPageRoute(builder: (context) => const LoginPage());
+              Navigator.of(context).pushAndRemoveUntil(
+                route,
+                (route) => false,
+              );
+            },
+          ),
+        ],
+      )),
       appBar: AppBar(
+        // automaticallyImplyLeading: false,
         title: const Text(
           "Let's Play Quiz",
         ),
@@ -62,43 +96,6 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
           ),
-          Positioned(
-              left: 20.0,
-              right: 20.0,
-              bottom: 20.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  GestureDetector(
-                    onTap: () {
-                      Route route = MaterialPageRoute(
-                          builder: (context) => ChangePasswordPage(
-                                username: widget.username,
-                              ));
-                      Navigator.push(context, route);
-                    },
-                    child: const Text(
-                      'Change password',
-                      style: TextStyle(color: Colors.brown, fontSize: 16.8),
-                    ),
-                  ),
-                  GestureDetector(
-                    onTap: () async {
-                      prefs.saveKeyCheck();
-                      Route route = MaterialPageRoute(
-                          builder: (context) => const LoginPage());
-                      Navigator.of(context).pushAndRemoveUntil(
-                        route,
-                        (route) => false,
-                      );
-                    },
-                    child: const Text(
-                      'Logout',
-                      style: TextStyle(color: Colors.brown, fontSize: 16.8),
-                    ),
-                  ),
-                ],
-              ))
         ],
       ),
     );
