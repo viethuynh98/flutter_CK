@@ -11,6 +11,7 @@ class QuizPage extends StatelessWidget {
     QuestionController _controller = Get.put(QuestionController());
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         actions: [
           IconButton(
               onPressed: _controller.nextQuestion,
