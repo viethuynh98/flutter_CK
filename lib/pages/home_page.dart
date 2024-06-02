@@ -32,6 +32,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    prefs.saveKeyCheck(true);
     return Scaffold(
       // backgroundColor: Colors.greenAccent,
       drawer: Drawer(
@@ -65,7 +66,6 @@ class _HomePageState extends State<HomePage> {
             leading: const Icon(Icons.logout),
             title: const Text("Log out"),
             onTap: () {
-              prefs.saveKeyCheck();
               Route route =
                   MaterialPageRoute(builder: (context) => const LoginPage());
               Navigator.of(context).pushAndRemoveUntil(

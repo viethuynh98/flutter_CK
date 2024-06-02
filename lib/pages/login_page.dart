@@ -41,6 +41,7 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    prefs.saveKeyCheck(false);
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
@@ -105,7 +106,11 @@ class _LoginPageState extends State<LoginPage> {
                                         username:
                                             usernameController.text.trim(),
                                       ));
-                              Navigator.push(context, route);
+                              Navigator.pushAndRemoveUntil(
+                                context,
+                                route,
+                                (route) => false,
+                              );
                               showNotification(context, result);
                             } else {
                               result = "Wrong username or wrong password";

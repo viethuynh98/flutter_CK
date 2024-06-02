@@ -40,9 +40,9 @@ class SharedPrefs {
     return isLogin;
   }
 
-  Future<void> saveKeyCheck() async {
+  Future<void> saveKeyCheck(bool isLogin) async {
     SharedPreferences prefs = await _prefs;
-    prefs.setBool(keyCheckLogin, false);
+    prefs.setBool(keyCheckLogin, isLogin);
   }
 
   Future<bool?> getKeyCheckFirstLogin() async {

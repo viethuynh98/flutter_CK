@@ -99,7 +99,6 @@ class QuestionController extends GetxController
   }
 
   void nextQuestion() {
-    print(questionNumber);
     if (questionNumber.value != questions.length) {
       isAnswered = false;
       _pageController.nextPage(

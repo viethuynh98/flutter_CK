@@ -59,7 +59,11 @@ class _ScorePageState extends State<ScorePage> {
                     builder: (context) => HomePage(
                           username: user.username,
                         ));
-                Navigator.pushReplacement(context, route);
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  route,
+                  (route) => false,
+                );
               },
               child: const Text('Back to Quiz'),
             ),
