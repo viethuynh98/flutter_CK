@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_prefs_test1/pages/quiz/add_question.dart';
+import 'package:shared_prefs_test1/pages/quiz/delete_question.dart';
 import '../components/app_elevated_button.dart';
 import '../constants.dart';
 import '../controller/question_controller.dart';
@@ -58,7 +59,7 @@ class _HomePageState extends State<HomePage> {
             title: const Text("Delete Question"),
             onTap: () {
               Route route = MaterialPageRoute(
-                  builder: (context) => const AddQuestionPage());
+                  builder: (context) => const DeleteQuestionPage());
               Navigator.push(context, route);
             },
           ),
