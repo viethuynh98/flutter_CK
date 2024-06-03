@@ -17,6 +17,7 @@ class _SplashPageState extends State<SplashPage> {
   SharedPrefs prefs = SharedPrefs();
   bool isLogin = false;
   bool firstTime = false;
+  bool isCheck = false;
   @override
   void initState() {
     // getValidationData();
@@ -24,14 +25,19 @@ class _SplashPageState extends State<SplashPage> {
   }
 
   Future getValidationData() async {
-    await prefs.getKeyCheck().then((value) {
-      isLogin = value ?? false;
-      setState(() {});
-    });
-    await prefs.getKeyCheckFirstLogin().then((value) {
-      firstTime = value ?? false;
-      setState(() {});
-    });
+    if (!isCheck) {
+      isCheck = true;
+      await prefs.getKeyCheck().then((value) {
+        isLogin = value ?? false;
+        setState(() {});
+      });
+      await prefs.getKeyCheckFirstLogin().then((value) {
+        firstTime = value ?? false;
+        setState(() {});
+      });
+    } else {
+      isCheck = false;
+    }
   }
 
   @override
