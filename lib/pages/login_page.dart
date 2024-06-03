@@ -174,49 +174,42 @@ class _LoginPageState extends State<LoginPage> {
                             }
                           },
                         ),
-                      )
+                      ),
+                      const Spacer(),
+                      !isValid
+                          ? GestureDetector(
+                              onTap: () {
+                                Route route = MaterialPageRoute(
+                                    builder: (context) => const RegisterPage());
+                                Navigator.push(context, route);
+                              },
+                              child: const Text(
+                                'Create an Account',
+                                style: TextStyle(
+                                    color: Colors.brown, fontSize: 16.8),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
+                          : GestureDetector(
+                              onTap: () {
+                                Route route = MaterialPageRoute(
+                                    builder: (context) => ForgotPasswordPage(
+                                          username: widget.username,
+                                        ));
+                                Navigator.push(context, route);
+                              },
+                              child: const Text(
+                                'Forgot Password?',
+                                style: TextStyle(
+                                    color: Colors.brown, fontSize: 16.8),
+                                textAlign: TextAlign.center,
+                              ),
+                            )
                     ],
                   ),
                 ),
               ),
             ),
-            Positioned(
-              left: 20.0,
-              right: 20.0,
-              bottom: 20.0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  !isValid
-                      ? GestureDetector(
-                          onTap: () {
-                            Route route = MaterialPageRoute(
-                                builder: (context) => const RegisterPage());
-                            Navigator.push(context, route);
-                          },
-                          child: const Text(
-                            'Create an Account',
-                            style:
-                                TextStyle(color: Colors.brown, fontSize: 16.8),
-                          ),
-                        )
-                      : GestureDetector(
-                          onTap: () {
-                            Route route = MaterialPageRoute(
-                                builder: (context) => ForgotPasswordPage(
-                                      username: widget.username,
-                                    ));
-                            Navigator.push(context, route);
-                          },
-                          child: const Text(
-                            'Forgot Password?',
-                            style:
-                                TextStyle(color: Colors.brown, fontSize: 16.8),
-                          ),
-                        )
-                ],
-              ),
-            )
           ],
         ),
       ),
