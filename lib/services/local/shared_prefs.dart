@@ -9,6 +9,7 @@ class SharedPrefs {
   final String keyCheckLogin = 'keyCheckLogin';
   final String keyCheckFirstLogin = 'keyCheckFirstLogin';
   final String keyNumOfPlays = 'keyNumOfPlays';
+  final String keyMaxScore = 'keyMaxScore';
   final String keyNewQuestions = 'keyNewQuestions';
 
   Future<UserModel?> getUser() async {
@@ -73,6 +74,24 @@ class SharedPrefs {
   Future<int?> getNumOfPlays() async {
     SharedPreferences prefs = await _prefs;
     return prefs.getInt(keyNumOfPlays);
+  }
+
+  Future<void> saveMaxScore(int score) async {
+    SharedPreferences prefs = await _prefs;
+    int? oldScore = prefs.getInt(keyMaxScore);
+    if (oldScore != null) {
+      if (score > oldScore) {
+        prefs.setInt(keyMaxScore, score);
+      }
+    } else {
+      prefs.setInt(keyMaxScore, 0);
+    }
+  }
+
+  Future<int?> getMaxScore() async {
+    SharedPreferences prefs = await _prefs;
+    print(prefs.getInt(keyMaxScore));
+    return prefs.getInt(keyMaxScore);
   }
 
   Future<List<Question>?> getQuestions() async {

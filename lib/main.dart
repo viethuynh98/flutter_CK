@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'pages/quiz/manipulate_question.dart';
 import 'pages/splash_page.dart';
 
 void main() {

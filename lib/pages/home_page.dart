@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_prefs_test1/pages/quiz/add_question.dart';
-import 'package:shared_prefs_test1/pages/quiz/manipulate_question.dart';
 import '../components/app_elevated_button.dart';
 import '../constants.dart';
 import '../controller/question_controller.dart';
 import '../services/local/shared_prefs.dart';
 import 'change_password_page.dart';
 import 'login_page.dart';
+import 'profile_page.dart';
+import 'quiz/add_question.dart';
+import 'quiz/manipulate_question.dart';
 import 'quiz/quiz_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -31,6 +32,7 @@ class _HomePageState extends State<HomePage> {
     if (widget.username != null) {
       nameController.text = widget.username!;
     }
+    prefs.saveMaxScore(0);
   }
 
   @override
@@ -41,9 +43,20 @@ class _HomePageState extends State<HomePage> {
       drawer: Drawer(
           child: ListView(
         children: [
-          const DrawerHeader(
-            decoration: BoxDecoration(color: Colors.orange),
-            child: Text("Menu"),
+          DrawerHeader(
+            decoration:
+                const BoxDecoration(color: Color.fromARGB(255, 174, 204, 214)),
+            child: GestureDetector(
+              onTap: () {
+                Route route = MaterialPageRoute(
+                    builder: (context) => const ProFilePage());
+                Navigator.push(context, route);
+              },
+              child: const CircleAvatar(
+                radius: 24,
+                backgroundImage: AssetImage('assets/images/image1.png'),
+              ),
+            ),
           ),
           ListTile(
             leading: const Icon(Icons.add_box_outlined),
