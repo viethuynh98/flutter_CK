@@ -18,7 +18,7 @@ factory Question.fromJson(Map<String, dynamic> json) => Question()
     ..id = json['id']
     ..answer = json['answer']
     ..question = json['question']
-    ..options = json['options'];
+    ..options = (json['options'] as List<dynamic>).map((e) => e as String).toList();
 }
 
 List<Question> sample_data = [

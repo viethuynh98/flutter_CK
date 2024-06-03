@@ -8,7 +8,8 @@ class AppTextField extends StatelessWidget {
       this.isPassword = false,
       this.isReadOnly = false,
       this.prefixIcon,
-      this.action = TextInputAction.next});
+      this.action = TextInputAction.next,
+      this.inputType});
 
   final TextEditingController? controller;
   final String? hintText;
@@ -16,6 +17,7 @@ class AppTextField extends StatelessWidget {
   final bool isReadOnly;
   final Icon? prefixIcon;
   final TextInputAction action;
+  final TextInputType? inputType;
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +29,7 @@ class AppTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(16.0),
       ),
       child: TextField(
+        keyboardType: inputType,
         controller: controller,
         obscureText: isPassword,
         readOnly: isReadOnly,

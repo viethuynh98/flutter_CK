@@ -42,15 +42,15 @@ class _HomePageState extends State<HomePage> {
             decoration: BoxDecoration(color: Colors.orange),
             child: Text("Menu"),
           ),
-          // ListTile(
-          //   leading: const Icon(Icons.password),
-          //   title: const Text("Add Question"),
-          //   onTap: () {
-          //     Route route = MaterialPageRoute(
-          //         builder: (context) => const AddQuestionPage());
-          //     Navigator.push(context, route);
-          //   },
-          // ),
+          ListTile(
+            leading: const Icon(Icons.password),
+            title: const Text("Add Question"),
+            onTap: () {
+              Route route = MaterialPageRoute(
+                  builder: (context) => const AddQuestionPage());
+              Navigator.push(context, route);
+            },
+          ),
           ListTile(
             leading: const Icon(Icons.password),
             title: const Text("Change Password"),

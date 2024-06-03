@@ -13,7 +13,7 @@ class SharedPrefs {
 
   Future<UserModel?> getUser() async {
     SharedPreferences prefs = await _prefs;
-    String? data = prefs.getString(keyUser); 
+    String? data = prefs.getString(keyUser);
     if (data == null) return null;
 
     print('object $data');
@@ -30,7 +30,7 @@ class SharedPrefs {
     SharedPreferences prefs = await _prefs;
     Map<String, dynamic> map = user.toJson();
     // NOTE
-    prefs.setString(keyUser, jsonEncode(map)); 
+    prefs.setString(keyUser, jsonEncode(map));
   }
 
   Future<bool?> getKeyCheck() async {
@@ -74,16 +74,16 @@ class SharedPrefs {
     return prefs.getInt(keyNumOfPlays);
   }
 
-    Future<List<Question>?> getQuestions() async {
+  Future<List<Question>?> getQuestions() async {
     SharedPreferences prefs = await _prefs;
     String? data = prefs.getString(keyNewQuestions);
     if (data == null) return null;
 
-    print('object $data');
+    // print('object $data');
 
     List<Map<String, dynamic>> maps = jsonDecode(data)
         .cast<Map<String, dynamic>>() as List<Map<String, dynamic>>;
-
+    // print('object $maps');
     return maps.map((e) => Question.fromJson(e)).toList();
   }
 
