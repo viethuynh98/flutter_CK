@@ -202,7 +202,7 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
                           widthFactor: 0.6,
                           child: AppElevatedButton(
                             onPressed: () {
-                              // _updateQuestion();
+                              _updateQuestion();
                             },
                             text: "Update Question",
                           ),

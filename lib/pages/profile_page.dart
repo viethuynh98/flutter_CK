@@ -114,7 +114,7 @@ class _ProFilePageState extends State<ProFilePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("No. Plays: "),
+                              const Text("No. Plays: "),
                               Text("$playtimes"),
                             ],
                           ),
@@ -141,7 +141,7 @@ class _ProFilePageState extends State<ProFilePage> {
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("MaxScore: "),
+                              const Text("MaxScore: "),
                               Text("$score"),
                             ],
                           ),
