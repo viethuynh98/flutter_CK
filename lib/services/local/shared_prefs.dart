@@ -83,7 +83,7 @@ class SharedPrefs {
 
     List<Map<String, dynamic>> maps = jsonDecode(data)
         .cast<Map<String, dynamic>>() as List<Map<String, dynamic>>;
-    // print('object $maps');
+    print('object $maps');
     return maps.map((e) => Question.fromJson(e)).toList();
   }
 

@@ -32,6 +32,7 @@ class QuestionController extends GetxController
 
   void getQuestions() {
     prefs.getQuestions().then((value) {
+      // print(value);
       questions = value ?? [...sample_data];
     });
   }
@@ -61,8 +62,8 @@ class QuestionController extends GetxController
   @override
   void onInit() {
     super.onInit();
-    _animationController =
-        AnimationController(duration: const Duration(seconds: progressBarDuration), vsync: this);
+    _animationController = AnimationController(
+        duration: const Duration(seconds: progressBarDuration), vsync: this);
     _animation = Tween(begin: 0.0, end: 1.0).animate(_animationController)
       ..addListener(() {
         update();

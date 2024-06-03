@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:shared_prefs_test1/pages/quiz/add_question.dart';
 import '../components/app_elevated_button.dart';
 import '../constants.dart';
+import '../controller/question_controller.dart';
 import '../services/local/shared_prefs.dart';
 import 'change_password_page.dart';
 import 'login_page.dart';
@@ -21,6 +22,7 @@ class _HomePageState extends State<HomePage> {
   TextEditingController nameController = TextEditingController();
   SharedPrefs prefs = SharedPrefs();
   final String title = 'Welcome';
+  QuestionController controller = Get.put(QuestionController());
 
   @override
   void initState() {

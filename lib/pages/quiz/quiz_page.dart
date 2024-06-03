@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_prefs_test1/pages/home_page.dart';
 import '../../components/body.dart';
 import '../../controller/question_controller.dart';
 
-class QuizPage extends StatelessWidget {
+class QuizPage extends StatefulWidget {
   const QuizPage({super.key});
+
+  @override
+  State<QuizPage> createState() => _QuizPageState();
+}
+
+class _QuizPageState extends State<QuizPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    
+  }
+
 
   @override
   Widget build(BuildContext context) {
     QuestionController controller = Get.put(QuestionController());
     controller.startAnimation();
+    controller.getQuestions();
     return PopScope(
       onPopInvoked: (bool _) {
         controller.reset();
