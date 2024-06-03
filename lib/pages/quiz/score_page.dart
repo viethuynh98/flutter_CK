@@ -55,8 +55,9 @@ class _ScorePageState extends State<ScorePage> {
               onPressed: () async {
                 controller.reset();
                 prefs.saveNumOfPlays();
-                int score = controller.numOfCorrectAns * 10;
-                prefs.saveMaxScore(score);
+                // int score = controller.numOfCorrectAns * 10;
+                print(controller.numOfCorrectAns * 10);
+                prefs.saveMaxScore(controller.numOfCorrectAns * 10);
                 Route route = MaterialPageRoute(
                     builder: (context) => HomePage(
                           username: user.username,

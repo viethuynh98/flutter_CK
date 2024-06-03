@@ -90,7 +90,6 @@ class SharedPrefs {
 
   Future<int?> getMaxScore() async {
     SharedPreferences prefs = await _prefs;
-    print(prefs.getInt(keyMaxScore));
     return prefs.getInt(keyMaxScore);
   }
 

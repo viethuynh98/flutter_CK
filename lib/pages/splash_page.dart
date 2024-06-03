@@ -38,7 +38,10 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     getValidationData();
     return AnimatedSplashScreen(
-      splash: Icons.home,
+      splash: const CircleAvatar(
+        radius: 40,
+        backgroundImage: AssetImage('assets/images/logo.png'),
+      ),
       nextScreen: firstTime
           ? const OnboardingScreen()
           : (isLogin == false ? const LoginPage() : const HomePage()),
