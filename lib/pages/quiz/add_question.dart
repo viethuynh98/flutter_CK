@@ -57,7 +57,7 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
     }
 
     final question = Question()
-      ..id = questions.length
+      ..id = (questions.length + 1)
       ..question = text
       ..options = [option1, option2, option3, option4]
       ..answer = answer;

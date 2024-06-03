@@ -25,26 +25,9 @@ class _AddQuestionPageState extends State<DeleteQuestionPage> {
 
   void _getQuestions() {
     prefs.getQuestions().then((value) {
-      // print("ffffffffffffffffffffffffffffffffffffffffffffff");
       questions = value ?? [...sample_data];
       setState(() {});
     });
-  }
-
-  void _deleteQuestion() async {
-    // questions.removeRange(question);
-    controller.questions = questions;
-    prefs.saveQuestions(questions);
-    // Clear fields and show a confirmation
-
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(const SnackBar(
-        content: Text("Question added!"),
-        duration: Duration(milliseconds: 750),
-      ));
-
-    setState(() {});
   }
 
   @override
@@ -119,6 +102,7 @@ class _AddQuestionPageState extends State<DeleteQuestionPage> {
                 style: TextStyle(color: Colors.blue, fontSize: 16.8),
               ),
               onPressed: () {
+                controller.questions = questions;
                 questions.removeWhere((e) => e.id == question.id);
                 prefs.saveQuestions(questions);
                 setState(() {});
