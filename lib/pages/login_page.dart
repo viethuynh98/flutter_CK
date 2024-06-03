@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shared_prefs_test1/pages/forgot_password_page.dart';
 import '../components/app_elevated_button.dart';
 import '../components/app_text_field.dart';
 import '../models/user_model.dart';
@@ -124,28 +125,43 @@ class _LoginPageState extends State<LoginPage> {
                 ),
               ),
             ),
-            if (!isValid)
-              Positioned(
-                left: 20.0,
-                right: 20.0,
-                bottom: 20.0,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Route route = MaterialPageRoute(
-                            builder: (context) => const RegisterPage());
-                        Navigator.push(context, route);
-                      },
-                      child: const Text(
-                        'Create an Account',
-                        style: TextStyle(color: Colors.brown, fontSize: 16.8),
-                      ),
-                    ),
-                  ],
-                ),
-              )
+            Positioned(
+              left: 20.0,
+              right: 20.0,
+              bottom: 20.0,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  !isValid
+                      ? GestureDetector(
+                          onTap: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => const RegisterPage());
+                            Navigator.push(context, route);
+                          },
+                          child: const Text(
+                            'Create an Account',
+                            style:
+                                TextStyle(color: Colors.brown, fontSize: 16.8),
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => ForgotPasswordPage(
+                                      username: widget.username,
+                                    ));
+                            Navigator.push(context, route);
+                          },
+                          child: const Text(
+                            'Forgot Password?',
+                            style:
+                                TextStyle(color: Colors.brown, fontSize: 16.8),
+                          ),
+                        )
+                ],
+              ),
+            )
           ],
         ),
       ),
