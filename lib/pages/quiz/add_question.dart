@@ -86,10 +86,15 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
         appBar: AppBar(title: const Text('Add Question')),
         body: Stack(
           children: [
-            Positioned.fill(
-                child: Container(
-              color: const Color(0xFF3b5999).withOpacity(0.6),
-            )),
+            Positioned(
+            child: Container(
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage("assets/images/quiz_bg_1.png"),
+                    fit: BoxFit.cover),
+              ),
+            ),
+          ),
             Positioned(
               top: 25.0,
               child: Container(

@@ -39,10 +39,15 @@ class _ManipulateQuestionPageState extends State<ManipulateQuestionPage> {
           appBar: AppBar(title: const Text('Delete Question')),
           body: Stack(
             children: [
-              Positioned.fill(
-                  child: Container(
-                color: const Color(0xFF3b5999).withOpacity(0.6),
-              )),
+              Positioned(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/quiz_bg_1.png"),
+                        fit: BoxFit.cover),
+                  ),
+                ),
+              ),
               Positioned.fill(
                   child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0)
