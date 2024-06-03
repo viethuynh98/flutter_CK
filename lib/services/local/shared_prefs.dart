@@ -16,11 +16,11 @@ class SharedPrefs {
     String? data = prefs.getString(keyUser);
     if (data == null) return null;
 
-    print('object $data');
+    // print('object $data');
 
     Map<String, dynamic> map = jsonDecode(data);
 
-    print('object $map');
+    // print('object $map');
 
     UserModel user = UserModel.fromJson(map);
     return user;
@@ -36,6 +36,7 @@ class SharedPrefs {
   Future<bool?> getKeyCheck() async {
     SharedPreferences prefs = await _prefs;
     bool? isLogin = prefs.getBool(keyCheckLogin);
+    // print(isLogin);
     if (isLogin == null) return false;
     return isLogin;
   }
@@ -48,13 +49,13 @@ class SharedPrefs {
   Future<bool?> getKeyCheckFirstLogin() async {
     SharedPreferences prefs = await _prefs;
     bool? isFirstLogin = prefs.getBool(keyCheckFirstLogin);
-    if (isFirstLogin == null) return false;
+    if (isFirstLogin == null) return true;
     return isFirstLogin;
   }
 
   Future<void> saveKeyCheckFirstLogin() async {
     SharedPreferences prefs = await _prefs;
-    prefs.setBool(keyCheckFirstLogin, true);
+    prefs.setBool(keyCheckFirstLogin, false);
   }
 
   Future<void> removeAll() async {
@@ -83,7 +84,7 @@ class SharedPrefs {
 
     List<Map<String, dynamic>> maps = jsonDecode(data)
         .cast<Map<String, dynamic>>() as List<Map<String, dynamic>>;
-    print('object $maps');
+    // print('object $maps');
     return maps.map((e) => Question.fromJson(e)).toList();
   }
 

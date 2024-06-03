@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../services/local/shared_prefs.dart';
 import 'login_page.dart';
 import 'size_config.dart';
 import '../models/onboarding_contents.dart';
@@ -11,6 +12,7 @@ class OnboardingScreen extends StatefulWidget {
 }
 
 class _OnboardingScreenState extends State<OnboardingScreen> {
+    SharedPrefs prefs = SharedPrefs();
   late PageController _controller;
   List<OnboardingContents> slicerContents = [];
 
@@ -122,6 +124,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           padding: const EdgeInsets.all(30),
                           child: ElevatedButton(
                             onPressed: () {
+                              prefs.saveKeyCheckFirstLogin();
                               Route route = MaterialPageRoute(
                                   builder: (context) => const LoginPage());
                               Navigator.pushReplacement(context, route);

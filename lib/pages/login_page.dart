@@ -101,6 +101,7 @@ class _LoginPageState extends State<LoginPage> {
                                     user.username &&
                                 passwordController.text == user.password) {
                               result = 'Login success!';
+                              prefs.saveKeyCheck(true);
                               Route route = MaterialPageRoute(
                                   builder: (context) => HomePage(
                                         // title: 'HomePage',

@@ -165,11 +165,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   GestureDetector(
-                    onTap: ()  {
+                    onTap: () {
                       prefs.removeAll();
                       Route route = MaterialPageRoute(
                           builder: (context) => const LoginPage());
-                      Navigator.push(context, route);
+                      Navigator.pushAndRemoveUntil(
+                          context, route, (route) => false);
                     },
                     child: const Text(
                       'Remove All',

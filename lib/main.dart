@@ -1,12 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:shared_prefs_test1/pages/home_page.dart';
-import 'package:shared_prefs_test1/pages/quiz/add_question.dart';
-import 'pages/change_password_page.dart';
-import 'pages/login_page.dart';
-import 'pages/quiz/quiz_page.dart';
-import 'pages/register_page.dart';
-import 'pages/onboarding_page.dart';
+import 'pages/quiz/manipulate_question.dart';
 import 'pages/splash_page.dart';
 
 void main() {

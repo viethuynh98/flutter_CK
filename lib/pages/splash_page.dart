@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:page_transition/page_transition.dart';
 import '../services/local/shared_prefs.dart';
 import 'home_page.dart';
 import 'login_page.dart';
+import 'onboarding_page.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -16,6 +16,7 @@ class SplashPage extends StatefulWidget {
 class _SplashPageState extends State<SplashPage> {
   SharedPrefs prefs = SharedPrefs();
   bool isLogin = false;
+  bool firstTime = false;
   @override
   void initState() {
     // getValidationData();
@@ -27,6 +28,10 @@ class _SplashPageState extends State<SplashPage> {
       isLogin = value ?? false;
       setState(() {});
     });
+    await prefs.getKeyCheckFirstLogin().then((value) {
+      firstTime = value ?? false;
+      setState(() {});
+    });
   }
 
   @override
@@ -34,7 +39,9 @@ class _SplashPageState extends State<SplashPage> {
     getValidationData();
     return AnimatedSplashScreen(
       splash: Icons.home,
-      nextScreen: isLogin == false ? const LoginPage() : const HomePage(),
+      nextScreen: firstTime
+          ? const OnboardingScreen()
+          : (isLogin == false ? const LoginPage() : const HomePage()),
       duration: 1500,
       splashTransition: SplashTransition.fadeTransition,
     );
