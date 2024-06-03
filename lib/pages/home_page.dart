@@ -45,8 +45,17 @@ class _HomePageState extends State<HomePage> {
             child: Text("Menu"),
           ),
           ListTile(
-            leading: const Icon(Icons.password),
+            leading: const Icon(Icons.add_box_outlined),
             title: const Text("Add Question"),
+            onTap: () {
+              Route route = MaterialPageRoute(
+                  builder: (context) => const AddQuestionPage());
+              Navigator.push(context, route);
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.delete),
+            title: const Text("Delete Question"),
             onTap: () {
               Route route = MaterialPageRoute(
                   builder: (context) => const AddQuestionPage());
