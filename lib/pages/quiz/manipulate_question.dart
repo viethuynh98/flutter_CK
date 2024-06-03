@@ -61,7 +61,7 @@ class _ManipulateQuestionPageState extends State<ManipulateQuestionPage> {
                     Expanded(
                         child: ListView.separated(
                       itemBuilder: (context, index) {
-                        final question = questions[index];
+                        final question = controller.questions[index];
                         return DeleteQuestionCard(
                           question,
                           onDelete: () => _delete(context, question),

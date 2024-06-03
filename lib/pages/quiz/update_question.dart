@@ -42,7 +42,7 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
     option2Controller.text = widget.qs.options![1];
     option3Controller.text = widget.qs.options![2];
     option4Controller.text = widget.qs.options![3];
-    answerController.text = widget.qs.answer.toString();
+    answerController.text = (widget.qs.answer! + 1).toString();
   }
 
   void _getQuestions() {
@@ -167,7 +167,6 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
                 AppElevatedButton(
                   onPressed: () {
                     _updateQuestion();
-                    Navigator.pop(context);
                   },
                   text: "Update Question",
                 ),
