@@ -96,83 +96,119 @@ class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(title: const Text('Update Question')),
-        body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                const Text(
-                  'Question',
-                  style: TextStyle(color: Colors.blue, fontSize: 16.8),
+        body: Stack(
+          children: [
+            Positioned.fill(
+                child: Container(
+              color: const Color(0xFF3b5999).withOpacity(0.6),
+            )),
+            Positioned(
+              top: 25.0,
+              child: Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 650,
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.4),
+                        blurRadius: 15.0,
+                        spreadRadius: 6.0,
+                      ),
+                    ]),
+                child: SingleChildScrollView(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0)
+                        .copyWith(top: 40.0, bottom: 20.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        const Text(
+                          'Question',
+                          style: TextStyle(color: Colors.blue, fontSize: 16.8),
+                        ),
+                        AppTextField(
+                          controller: questionController,
+                          hintText: 'Enter question',
+                          prefixIcon:
+                              const Icon(Icons.person, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 10.0),
+                        const Text(
+                          'Option 1',
+                          style: TextStyle(color: Colors.blue, fontSize: 16.8),
+                        ),
+                        AppTextField(
+                          controller: option1Controller,
+                          hintText: 'Enter option 1',
+                          prefixIcon:
+                              const Icon(Icons.person, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 10.0),
+                        const Text(
+                          'Option 2',
+                          style: TextStyle(color: Colors.blue, fontSize: 16.8),
+                        ),
+                        AppTextField(
+                          controller: option2Controller,
+                          hintText: 'Enter option 2',
+                          prefixIcon:
+                              const Icon(Icons.person, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 10.0),
+                        const Text(
+                          'Option 3',
+                          style: TextStyle(color: Colors.blue, fontSize: 16.8),
+                        ),
+                        AppTextField(
+                          controller: option3Controller,
+                          hintText: 'Enter option 3',
+                          prefixIcon:
+                              const Icon(Icons.person, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 10.0),
+                        const Text(
+                          'Option 4',
+                          style: TextStyle(color: Colors.blue, fontSize: 16.8),
+                        ),
+                        AppTextField(
+                          controller: option4Controller,
+                          hintText: 'Enter option 4',
+                          prefixIcon:
+                              const Icon(Icons.person, color: Colors.grey),
+                        ),
+                        const SizedBox(height: 10.0),
+                        const Text(
+                          'Answer',
+                          style: TextStyle(color: Colors.blue, fontSize: 16.8),
+                        ),
+                        AppTextField(
+                          controller: answerController,
+                          hintText: 'Enter answer index (1-4)',
+                          prefixIcon:
+                              const Icon(Icons.person, color: Colors.grey),
+                          action: TextInputAction.done,
+                          // inputType: TextInputType.number,
+                        ),
+                        const SizedBox(height: 20.0),
+                        FractionallySizedBox(
+                          widthFactor: 0.6,
+                          child: AppElevatedButton(
+                            onPressed: () {
+                              // _updateQuestion();
+                            },
+                            text: "Update Question",
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
-                AppTextField(
-                  controller: questionController,
-                  hintText: 'Enter question',
-                  prefixIcon: const Icon(Icons.person, color: Colors.grey),
-                ),
-                const SizedBox(height: 10.0),
-                const Text(
-                  'Option 1',
-                  style: TextStyle(color: Colors.blue, fontSize: 16.8),
-                ),
-                AppTextField(
-                  controller: option1Controller,
-                  hintText: 'Enter option 1',
-                  prefixIcon: const Icon(Icons.person, color: Colors.grey),
-                ),
-                const SizedBox(height: 10.0),
-                const Text(
-                  'Option 2',
-                  style: TextStyle(color: Colors.blue, fontSize: 16.8),
-                ),
-                AppTextField(
-                  controller: option2Controller,
-                  hintText: 'Enter option 2',
-                  prefixIcon: const Icon(Icons.person, color: Colors.grey),
-                ),
-                const SizedBox(height: 10.0),
-                const Text(
-                  'Option 3',
-                  style: TextStyle(color: Colors.blue, fontSize: 16.8),
-                ),
-                AppTextField(
-                  controller: option3Controller,
-                  hintText: 'Enter option 3',
-                  prefixIcon: const Icon(Icons.person, color: Colors.grey),
-                ),
-                const SizedBox(height: 10.0),
-                const Text(
-                  'Option 4',
-                  style: TextStyle(color: Colors.blue, fontSize: 16.8),
-                ),
-                AppTextField(
-                  controller: option4Controller,
-                  hintText: 'Enter option 4',
-                  prefixIcon: const Icon(Icons.person, color: Colors.grey),
-                ),
-                const SizedBox(height: 10.0),
-                const Text(
-                  'Answer',
-                  style: TextStyle(color: Colors.blue, fontSize: 16.8),
-                ),
-                AppTextField(
-                  controller: answerController,
-                  hintText: 'Enter answer index (1-4)',
-                  prefixIcon: const Icon(Icons.person, color: Colors.grey),
-                  action: TextInputAction.done,
-                  // inputType: TextInputType.number,
-                ),
-                const SizedBox(height: 20.0),
-                AppElevatedButton(
-                  onPressed: () {
-                    _updateQuestion();
-                  },
-                  text: "Update Question",
-                ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
