@@ -37,17 +37,21 @@ class _ManipulateQuestionPageState extends State<ManipulateQuestionPage> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
           appBar: AppBar(title: const Text('Delete Question')),
-          body: Stack( 
+          body: Stack(
             children: [
+              Positioned.fill(
+                  child: Container(
+                color: const Color(0xFF3b5999).withOpacity(0.6),
+              )),
               Positioned.fill(
                   child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0)
                     .copyWith(top: 20.0),
                 child: Column(
                   children: [
-                    const Text(
-                      "List Questions",
-                      style: TextStyle(color: Colors.green, fontSize: 25.5),
+                    Text(
+                      "Questions",
+                      style: TextStyle(color: Colors.amber[50], fontSize: 25.5),
                     ),
                     const Divider(
                       height: 1.2,
