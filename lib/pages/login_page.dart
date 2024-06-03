@@ -110,12 +110,11 @@ class _LoginPageState extends State<LoginPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      // const Text(
-                      //   'Login',
-                      //   style: TextStyle(color: Colors.blue, fontSize: 33.6),
-                      //   textAlign: TextAlign.center,
-                      // ),
-                      const SizedBox(height: 40.0),
+                      const CircleAvatar(
+                        radius: 24,
+                        backgroundImage: AssetImage('assets/images/image1.png'),
+                      ),
+                      const SizedBox(height: 20.0),
                       const Text(
                         'Username',
                         style: TextStyle(color: Colors.blue, fontSize: 16.8),
