@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_prefs_test1/components/app_text_field.dart';
 import '../../components/app_elevated_button.dart';
+import '../../controller/question_controller.dart';
 import '../../models/questions.dart';
 import '../../services/local/shared_prefs.dart';
 
@@ -20,10 +22,19 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
   TextEditingController answerController = TextEditingController();
   SharedPrefs prefs = SharedPrefs();
   List<Question> questions = sample_data;
+  QuestionController controller = Get.put(QuestionController());
 
-  void getQuestions() {
+  @override
+  void initState() {
+    _getQuestions();
+    super.initState();
+  }
+
+  void _getQuestions() {
     prefs.getQuestions().then((value) {
+      // print("ffffffffffffffffffffffffffffffffffffffffffffff");
       questions = value ?? [...sample_data];
+      setState(() {});
     });
   }
 
@@ -44,7 +55,6 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
         answer > 3) {
       return;
     }
-    print("workworkworkworkworkwork");
 
     final question = Question()
       ..id = questions.length
@@ -52,9 +62,9 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
       ..options = [option1, option2, option3, option4]
       ..answer = answer;
 
-      questions.add(question);
-
-      prefs.saveQuestions(questions);
+    questions.add(question);
+    controller.questions = questions;
+    prefs.saveQuestions(questions);
     // Clear fields and show a confirmation
     _clearFields();
 
@@ -64,6 +74,8 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
         content: Text("Question added!"),
         duration: Duration(milliseconds: 750),
       ));
+
+    setState(() {});
   }
 
   void _clearFields() {
