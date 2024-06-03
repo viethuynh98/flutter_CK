@@ -65,12 +65,13 @@ class _ManipulateQuestionPageState extends State<ManipulateQuestionPage> {
                         return DeleteQuestionCard(
                           question,
                           onDelete: () => _delete(context, question),
-                          onUpdate: () {
+                          onUpdate: () async {
                             Route route = MaterialPageRoute(
                                 builder: (context) => UpdateQuestionPage(
                                       qs: question,
                                     ));
-                            Navigator.push(context, route);
+                            await Navigator.push(context, route);
+                            setState(() {});
                           },
                         );
                       },
