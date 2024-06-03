@@ -26,7 +26,7 @@ class AppElevatedButton extends StatelessWidget {
         decoration: BoxDecoration(
             color: color,
             border: Border.all(color: Colors.white, width: 1.2),
-            borderRadius: const BorderRadius.all(Radius.circular(8.0)),
+            borderRadius: const BorderRadius.all(Radius.circular(20.0)),
             boxShadow: const [
               BoxShadow(
                 offset: Offset(0.0, 3.0),

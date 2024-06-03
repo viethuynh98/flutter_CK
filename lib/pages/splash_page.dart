@@ -44,6 +44,7 @@ class _SplashPageState extends State<SplashPage> {
   Widget build(BuildContext context) {
     getValidationData();
     return AnimatedSplashScreen(
+      backgroundColor: const Color(0xFF3b5999).withOpacity(0.6),
       splash: const CircleAvatar(
         radius: 40,
         backgroundImage: AssetImage('assets/images/logo.png'),

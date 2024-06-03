@@ -48,19 +48,73 @@ class _LoginPageState extends State<LoginPage> {
       child: Scaffold(
         body: Stack(
           children: [
-            Positioned.fill(
-              child: SingleChildScrollView(
+            Positioned(
+                top: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: Container(
+                  height: 300.0,
+                  decoration: const BoxDecoration(
+                    image: DecorationImage(
+                        image: AssetImage("assets/images/quiz_bg_1.png"),
+                        fit: BoxFit.fill),
+                  ),
+                  child: Container(
+                    padding: const EdgeInsets.only(top: 90.0, left: 20.0),
+                    color: const Color(0xFF3b5999).withOpacity(0.6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        // ta có thể sử dụng RichText để tạo text với nhiều format khác nhau
+                        RichText(
+                          text: TextSpan(
+                            text: "Welcome to ",
+                            style: TextStyle(
+                                color: Colors.yellow[700], fontSize: 25.0),
+                            children: [
+                              TextSpan(
+                                  text: "QQ Quiz",
+                                  style: TextStyle(
+                                      color: Colors.amber[900], fontSize: 25.0))
+                            ],
+                          ),
+                        ),
+                        const SizedBox(height: 10.0),
+                        const Text(
+                          "Let's Play Together",
+                          style: TextStyle(color: Colors.white, fontSize: 17.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                )),
+            Positioned(
+              top: 200,
+              child: Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 500,
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.4),
+                        blurRadius: 15.0,
+                        spreadRadius: 6.0,
+                      ),
+                    ]),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0)
                       .copyWith(top: 40.0, bottom: 20.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const Text(
-                        'Login',
-                        style: TextStyle(color: Colors.blue, fontSize: 33.6),
-                        textAlign: TextAlign.center,
-                      ),
+                      // const Text(
+                      //   'Login',
+                      //   style: TextStyle(color: Colors.blue, fontSize: 33.6),
+                      //   textAlign: TextAlign.center,
+                      // ),
                       const SizedBox(height: 40.0),
                       const Text(
                         'Username',

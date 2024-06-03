@@ -37,7 +37,7 @@ class _ManipulateQuestionPageState extends State<ManipulateQuestionPage> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
           appBar: AppBar(title: const Text('Delete Question')),
-          body: Stack(
+          body: Stack( 
             children: [
               Positioned.fill(
                   child: Padding(
