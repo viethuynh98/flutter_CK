@@ -43,7 +43,25 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         body: Stack(
           children: [
             Positioned.fill(
-              child: SingleChildScrollView(
+                child: Container(
+              color: const Color(0xFF3b5999).withOpacity(0.6),
+            )),
+            Positioned(
+              top: 100.0,
+              child: Container(
+                width: MediaQuery.of(context).size.width - 40,
+                height: 600,
+                margin: const EdgeInsets.symmetric(horizontal: 20.0),
+                decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(15.0),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withOpacity(0.4),
+                        blurRadius: 15.0,
+                        spreadRadius: 6.0,
+                      ),
+                    ]),
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20.0)
                       .copyWith(top: 40.0, bottom: 20.0),
@@ -95,7 +113,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                       FractionallySizedBox(
                         widthFactor: 0.4,
                         child: AppElevatedButton(
-                          text: 'Next',
+                          text: 'Confirm',
                           onPressed: () async {
                             String result = 'Enter your password';
                             if (newPasswordController.text.isEmpty) {
