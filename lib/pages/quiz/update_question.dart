@@ -6,14 +6,19 @@ import '../../controller/question_controller.dart';
 import '../../models/questions.dart';
 import '../../services/local/shared_prefs.dart';
 
-class AddQuestionPage extends StatefulWidget {
-  const AddQuestionPage({super.key});
+class UpdateQuestionPage extends StatefulWidget {
+  const UpdateQuestionPage({
+    super.key,
+    required this.qs,
+  });
+
+  final Question qs;
 
   @override
-  State<AddQuestionPage> createState() => _AddQuestionPageState();
+  State<UpdateQuestionPage> createState() => _UpdateQuestionPageState();
 }
 
-class _AddQuestionPageState extends State<AddQuestionPage> {
+class _UpdateQuestionPageState extends State<UpdateQuestionPage> {
   TextEditingController questionController = TextEditingController();
   TextEditingController option1Controller = TextEditingController();
   TextEditingController option2Controller = TextEditingController();
@@ -21,14 +26,33 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
   TextEditingController option4Controller = TextEditingController();
   TextEditingController answerController = TextEditingController();
   SharedPrefs prefs = SharedPrefs();
+  List<Question> questions = sample_data;
   QuestionController controller = Get.put(QuestionController());
 
   @override
   void initState() {
+    _getQuestions();
+    getQuestionInfo();
     super.initState();
   }
 
-  void _addQuestion() async {
+  void getQuestionInfo() {
+    questionController.text = widget.qs.question!;
+    option1Controller.text = widget.qs.options![0];
+    option2Controller.text = widget.qs.options![1];
+    option3Controller.text = widget.qs.options![2];
+    option4Controller.text = widget.qs.options![3];
+    answerController.text = widget.qs.answer.toString();
+  }
+
+  void _getQuestions() {
+    prefs.getQuestions().then((value) {
+      questions = value ?? [...sample_data];
+      setState(() {});
+    });
+  }
+
+  void _updateQuestion() async {
     String text = questionController.text.trim();
     String option1 = option1Controller.text.trim();
     String option2 = option2Controller.text.trim();
@@ -47,34 +71,23 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
     }
 
     final question = Question()
-      ..id = (controller.questions.length + 1)
+      ..id = widget.qs.id
       ..question = text
       ..options = [option1, option2, option3, option4]
       ..answer = answer;
 
-    // questions.add(question);
-    controller.questions.add(question);
-    prefs.saveQuestions(controller.questions);
-    // Clear fields and show a confirmation
-    _clearFields();
+    questions[widget.qs.id! - 1] = question;
+    controller.questions = questions;
+    prefs.saveQuestions(questions);
 
     ScaffoldMessenger.of(context)
       ..removeCurrentSnackBar()
       ..showSnackBar(const SnackBar(
-        content: Text("Question added!"),
+        content: Text("Question updated!"),
         duration: Duration(milliseconds: 750),
       ));
 
     setState(() {});
-  }
-
-  void _clearFields() {
-    questionController.clear();
-    option1Controller.clear();
-    option2Controller.clear();
-    option3Controller.clear();
-    option4Controller.clear();
-    answerController.clear();
   }
 
   @override
@@ -82,7 +95,7 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-        appBar: AppBar(title: const Text('Add Question')),
+        appBar: AppBar(title: const Text('Update Question')),
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: SingleChildScrollView(
@@ -152,8 +165,11 @@ class _AddQuestionPageState extends State<AddQuestionPage> {
                 ),
                 const SizedBox(height: 20.0),
                 AppElevatedButton(
-                  onPressed: _addQuestion,
-                  text: "Add Question",
+                  onPressed: () {
+                    _updateQuestion();
+                    Navigator.pop(context);
+                  },
+                  text: "Update Question",
                 ),
               ],
             ),

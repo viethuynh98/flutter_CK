@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:shared_prefs_test1/pages/quiz/update_question.dart';
 import '../../controller/question_controller.dart';
 import '../../models/question_card.dart';
 import '../../models/questions.dart';
 import '../../services/local/shared_prefs.dart';
 
-class DeleteQuestionPage extends StatefulWidget {
-  const DeleteQuestionPage({super.key});
+class ManipulateQuestionPage extends StatefulWidget {
+  const ManipulateQuestionPage({super.key});
 
   @override
-  State<DeleteQuestionPage> createState() => _AddQuestionPageState();
+  State<ManipulateQuestionPage> createState() => _ManipulateQuestionPageState();
 }
 
-class _AddQuestionPageState extends State<DeleteQuestionPage> {
+class _ManipulateQuestionPageState extends State<ManipulateQuestionPage> {
   SharedPrefs prefs = SharedPrefs();
   List<Question> questions = sample_data;
   QuestionController controller = Get.put(QuestionController());
@@ -35,7 +36,7 @@ class _AddQuestionPageState extends State<DeleteQuestionPage> {
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
-          appBar: AppBar(title: const Text('Add Question')),
+          appBar: AppBar(title: const Text('Delete Question')),
           body: Stack(
             children: [
               Positioned.fill(
@@ -64,6 +65,13 @@ class _AddQuestionPageState extends State<DeleteQuestionPage> {
                         return DeleteQuestionCard(
                           question,
                           onDelete: () => _delete(context, question),
+                          onUpdate: () {
+                            Route route = MaterialPageRoute(
+                                builder: (context) => UpdateQuestionPage(
+                                      qs: question,
+                                    ));
+                            Navigator.push(context, route);
+                          },
                         );
                       },
                       separatorBuilder: (_, __) => const SizedBox(height: 20.0),
